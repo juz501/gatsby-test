@@ -3,7 +3,7 @@ module.exports = {
     title: `Gatsby Test`,
     description: `Testing Gatsby Default.`,
     author: `Julian Chan`,
-    siteUrl: `http://localhost`,
+    siteUrl: `http://localhost:8000`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

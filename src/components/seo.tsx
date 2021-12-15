@@ -34,7 +34,7 @@ const Seo = ( {
 } : DataProps ) => {
   const { site } = useStaticQuery(
     graphql`
-      query {
+      query SiteMetaData {
         site {
           siteMetadata {
             title

@@ -5,11 +5,13 @@ import Layout from '../layouts/layout'
 import Seo from '../components/seo'
 
 type DataProps = {
-  message?: string,
-  status?: string,
+  serverData?: {
+    message?: string,
+    status?: string
+  }
 }
 
-const UsingSSR = ({ serverData } : { serverData: DataProps }) => {
+const UsingSSR: React.FC<DataProps> = ( { serverData } ) => {
   return (
     <Layout>
       <Seo title="Using SSR" />
@@ -17,7 +19,8 @@ const UsingSSR = ({ serverData } : { serverData: DataProps }) => {
       <img
         style={{ width: '300px' }}
         alt="A random dog"
-        src={serverData.message}
+        src={serverData?.message ?? ''}
+        data-testid="random-dog"
       />
       <p>Welcome to a server side rendered page with a random dog photo</p>
       <p>
