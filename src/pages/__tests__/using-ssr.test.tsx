@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { useStaticQuery } from "gatsby";
 
-import UsingSSR, { getServerData } from "../using-ssr";
+import UsingSSR from "../using-ssr";
 
 const siteMetaMock = {
   site: {
