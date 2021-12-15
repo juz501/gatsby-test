@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { useStaticQuery } from "gatsby";
 
-import UsingSSR from "../using-ssr";
+import UsingSSR, { getServerData } from "../using-ssr";
 
 const siteMetaMock = {
   site: {
@@ -16,18 +16,15 @@ const siteMetaMock = {
 
 const mockUseStaticQuery = useStaticQuery as jest.MockedFunction<typeof useStaticQuery>;
 
-const dogData = {
-  message: 'https://dog.ceo/api/breeds/image/random',
-  status: 'success'
-}
-
 describe("Using SSR", () => {
-  beforeAll(() => {
+  beforeEach(() => {
     mockUseStaticQuery.mockReturnValue(siteMetaMock);
+    // TODO: mock fetch
   })
-  it("exists with a dog URL", () => {
-    const { getByTestId } = render(<UsingSSR serverData={dogData} />);
+  it("exists with a dog URL",  async () => {
+    const data = await getServerData();
+    const { getByTestId } = await render(<UsingSSR serverData={data.props}/>);
     const node = getByTestId(`random-dog`);
-    expect(node).toHaveAttribute("src", "https://dog.ceo/api/breeds/image/random");
+    expect(node).toHaveAttribute("src", expect.not.stringMatching(''));
   })
 });
