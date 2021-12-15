@@ -14,6 +14,11 @@ const siteMetaMock = {
   }
 }
 
+const dogMock = {
+  message: 'https://www.google.com',
+  status: 'success'
+}
+
 const mockUseStaticQuery = useStaticQuery as jest.MockedFunction<typeof useStaticQuery>;
 
 describe("Using SSR", () => {
@@ -21,10 +26,9 @@ describe("Using SSR", () => {
     mockUseStaticQuery.mockReturnValue(siteMetaMock);
     // TODO: mock fetch
   })
-  it("exists with a dog URL",  async () => {
-    const data = await getServerData();
-    const { getByTestId } = await render(<UsingSSR serverData={data.props}/>);
+  it("should successfully set src to image tag", () => {
+    const { getByTestId } = render(<UsingSSR serverData={ dogMock }/>);
     const node = getByTestId(`random-dog`);
-    expect(node).toHaveAttribute("src", expect.not.stringMatching(''));
+    expect(node).toHaveAttribute("src", expect.stringMatching('https://www.google.com'));
   })
 });
