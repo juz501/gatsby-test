@@ -1,0 +1,18 @@
+html,
+body {
+  min-height: 100vh;
+  background: #e9e9ec;
+}
+ol.list-content {
+  counter-reset: list;
+}
+
+ol.list-content li {
+  @apply relative pl-8 mb-2;
+  counter-increment: list;
+}
+
+ol.list-content li::before {
+  @apply absolute text-cGray font-bold -left-0 text-base leading-paragraph;
+  content: counters(list, '.') '. ';
+}
